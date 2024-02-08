@@ -27,13 +27,16 @@ int max_number(int num1, int num2) {
         return 0;
 }
 bool is_prime(int number) {
+    int check=0;
     for (int i = 2; i < number; i++)
     {
         if (number % i == 0)
-            return false;
-        else
-            return true;
+            check += number / i;
     }
+    if (check > 0)
+        return false;
+    else
+        return true;
 }
 int sum_of_digits(int n) {
     int sum = 0;

@@ -7,10 +7,11 @@ int main()
     setlocale(LC_ALL, "RUS");
     int x, b, h, r, w, l, num, num1, num2, number, n;
     string str1;
-    cout << "Выберите действие:\n1.Вычисление площади треугольника\n2.Вычисление объёма параллелепипеда\n3.Вычисление площади круга\n4.Проверка числа на чётность/нечётность\n5.Максимальное число из 2-ух\n6.Проверка числа на простое\n7.Вычисление суммы цифр числа\n";
+    
     while (_getch() != 27)
     {
-        cout << "Выберите действие ещё раз или нажмите ESC для выхода\n";
+        system("cls");
+        cout << "Выберите действие:\n1.Вычисление площади треугольника\n2.Вычисление объёма параллелепипеда\n3.Вычисление площади круга\n4.Проверка числа на чётность/нечётность\n5.Максимальное число из 2-ух\n6.Проверка числа на простое\n7.Вычисление суммы цифр числа\nESC - выход из программы\n";
         cin >> x;
         system("cls");
         switch (x) 
@@ -18,19 +19,31 @@ int main()
             case 1:
             {
                 cout << "1.Вычисление площади треугольника\n";
+                cout << "Введите значения b и h\n";
                 cin >> b;
                 cin >> h;
+                if ((b | h) < 0)
+                {
+                    cout << "Значения b и h не могут быть отрицательными\n";
+                    break;
+                }
                 const double triangle_area = triangle_area_calculator(b, h);
                 cout << triangle_area << endl;
-            break;
+                break;
             }
             case 2:
             {
                 cout << "2.Вычисление объёма параллелепипеда\n";
                 h = 0;
+                cout << "Введите значения l, w и h\n";
                 cin >> l;
                 cin >> w;
                 cin >> h;
+                if ((l | w | h) < 0)
+                {
+                    cout << "Значения l, w и h не могут быть отрицательными\n";
+                    break;
+                }
                 const int parallelepiped_volume = parallelepiped_volume_calculator(l, w, h);
                 cout << parallelepiped_volume << endl;
                 break;
@@ -38,7 +51,13 @@ int main()
             case 3:
             {
                 cout << "3.Вычисление площади круга\n";
+                cout << "Введите значение r\n";
                 cin >> r;
+                if (r < 0)
+                {
+                    cout << "Значение r не могжет быть отрицательным\n";
+                    break;
+                }
                 const double circumference = circumference_calculator(r);
                 cout << circumference << endl;
                 break;
