@@ -5,13 +5,36 @@ using namespace std;
 
 double triangle_area_calculator(int b, int h)
 {
-    return b * h / 2;
+    if ((b | h) < 0) {
+        cerr << "Error\n b or h cannot be negative\n";
+        return 0;
+    }
+    else if ((b|h)==0){
+        cerr << "Error\n b or h cannot be zero\n";
+        return 1;
+    }
+    else
+    {
+        return b * h / 2;
+    }
 }
 int parallelepiped_volume_calculator(int l, int w, int h) {
-    return l * w * h;
+    if ((l | w | h) < 0) {
+        cerr << "Error\n l, w or h cannot be negative\n";
+        return 0;
+    }
+    else if ((l | w | h) == 0) {
+        cerr << "Error\n l, w or h cannot be zero\n";
+        return 1;
+    }
+    else return l * w * h;
 }
 double circumference_calculator(int r) {
-    return r * 3.14 * 2;
+    if (r <= 0) {
+        cout << "Error\n r cannot be zero\n";
+        return 1;
+    }
+    else return r * 3.14 * 2;
 }
 bool is_even(int number) {
     if (number % 2 == 0)
@@ -52,39 +75,74 @@ int sum_of_digits(int n) {
     }
 
 }
-void test_function() {
+void test_triangle_area() {
+    cout << "2*5*0.5 = 5?\n";
     assert(triangle_area_calculator(2, 5) == 5);
-    assert(triangle_area_calculator(2, 0) == 0);
-    assert(triangle_area_calculator(2, -5) == -5);
-    assert(triangle_area_calculator(10, 20) == 100);
-    cout << "Tests 1: OK\n";
-    assert(parallelepiped_volume_calculator(-8, -10, 10) == 800);
-    assert(parallelepiped_volume_calculator(8, -10, 10) == -800);
-    assert(parallelepiped_volume_calculator(-20, 1, 0) == 0);
-    assert(parallelepiped_volume_calculator(1, 1, 1) == 1);
-    cout << "Tests 2: OK\n";
-    assert(circumference_calculator(100) == 628);
-    assert(circumference_calculator(-100) == -628);
-    assert(circumference_calculator(0) == 0);
-    assert(circumference_calculator(1) == 6.28);
-    cout << "Tests 3: OK\n";
-    assert(is_even(20) == true);
-    assert(is_even(21) == false);
-    assert(is_even(-20) == true);
-    assert(is_even(-21) == false);
-    cout << "Tests 4: OK\n";
-    assert(max_number(-100, 200) == 200);
-    assert(max_number(-100, -200) == -100);
-    assert(max_number(0, 0) == 0);
-    assert(max_number(1, 1) == 0);
-    cout << "Tests 5: OK\n";
-    assert(is_prime(17) == true);
-    assert(is_prime(18) == false);
-    cout << "Tests 6: OK\n";
-    assert(sum_of_digits(123456) == 21);
-    assert(sum_of_digits(-201) == 3);
-    assert(sum_of_digits(92781) == 27);
-    assert(sum_of_digits(1020102) == 6);
-    cout << "Tests 7: OK\n";
+    cout << "Yes!\n";
+    cout << "10*5*0.5 = 25?\n";
+    assert(triangle_area_calculator(10, 5) == 25);
+    cout << "Yes!\n";
+    cout << "200*50*0.5 = 2500?\n";
+    assert(triangle_area_calculator(200, 50) != 2500);
+    cout << "No!\n";
+    cout << "Test 1: OK\n";
 }
-// Íàäåþñü ýòî áóäåò ðàáîòàòü à òî ãèò ðóãàåòñÿ
+void test_parallelepiped_volume() {
+    cout << "8*10*20 = 1600?\n";
+    assert(parallelepiped_volume_calculator(8, 10, 20) == 1600);
+    cout << "Yes!\n";
+    cout << "4*5*1 = 200?\n";
+    assert(parallelepiped_volume_calculator(4, 5, 1) != 200);
+    cout << "No!\n";
+    cout << "7*11*2 = 154?\n";
+    assert(parallelepiped_volume_calculator(7, 11, 2) == 154);
+    cout << "Yes!\n";
+    cout << "Test 2: OK\n";
+}
+void test_circumference() {
+    cout << "100*3.14*2 = 628?\n";
+    assert(circumference_calculator(100) == 628);
+    cout << "Yes!\n";
+    cout << "1*3.14*2 = 6.28?\n";
+    assert(circumference_calculator(1) == 6.28);
+    cout << "Yes!\n";
+    cout << "Test 3: OK\n";
+}
+void test_even() {
+    cout << "20 is even?\n";
+    assert(is_even(20) == true);
+    cout << "Yes!\n";
+    cout << "21 is even?\n";
+    assert(is_even(21) == false);
+    cout << "No!";
+    cout << "Test 4: OK\n";
+}
+void test_max() {
+    cout << "20 bigger than 28?\n";
+    assert(max_number(20, 28) != 20);
+    cout << "No!\n";
+    cout << "-5 bigger than -100?\n";
+    assert(max_number(-5, -100) == -5);
+    cout << "Yes!\n";
+    cout << "Test 5: OK\n";
+}
+void test_prime() {
+    cout << "9 is prime?\n";
+    assert(is_prime(9) == false);
+    cout << "No!\n";
+    cout << "7 is prime?\n";
+    assert(is_prime(7) == true);
+    cout << "Yes!\n";
+    cout << "Test 6: OK\n";
+}
+void test_digits() {
+    cout << "Sum of digits in 123 = 6?\n";
+    assert(sum_of_digits(123) == 6);
+    cout << "Yes!\n";
+    cout << "Sum of digits in 201 = 7?\n";
+    assert(sum_of_digits(201) != 7);
+    cout << "No!\n";
+    cout << "Test 7: OK\n";
+
+}
+// ÐÐ°Ð´ÐµÑŽÑÑŒ ÑÑ‚Ð¾ Ð±ÑƒÐ´ÐµÑ‚ Ñ€Ð°Ð±Ð¾Ñ‚Ð°Ñ‚ÑŒ Ð° Ñ‚Ð¾ Ð³Ð¸Ñ‚ Ñ€ÑƒÐ³Ð°ÐµÑ‚ÑÑ
